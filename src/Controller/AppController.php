@@ -59,7 +59,7 @@ class AppController extends Controller
     $controller = $this->request->getParam('controller');
     $action = $this->request->getParam('action');
 
-    // 🔐 permitir login y logout SIEMPRE
+    //  permitir login y logout SIEMPRE
     if (!$session->check('Auth') && !in_array($action, ['login', 'logout'])) {
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
@@ -71,10 +71,10 @@ class AppController extends Controller
 
     $rol = $session->read('Auth.rol_id');
 
-    // 👤 CLIENTE
+    // CLIENTE
     if ($rol == 2) {
 
-        // ❌ bloquear Users EXCEPTO logout
+        // bloquear Users EXCEPTO logout
         if ($controller == 'Users' && $action != 'logout') {
             return $this->redirect(['controller' => 'Reservas', 'action' => 'index']);
         }
@@ -84,12 +84,12 @@ class AppController extends Controller
             return $this->redirect(['controller' => 'Reservas', 'action' => 'index']);
         }
 
-        // ❌ bloquear Recursos  
+        // bloquear Recursos  
         //if ($controller == 'Recursos') {
         //    return $this->redirect(['controller' => 'Reservas', 'action' => 'index']);
         //}
 
-        // ❌ bloquear editar y eliminar reservas
+        //  bloquear editar y eliminar reservas
         if ($controller == 'Reservas' && in_array($action, ['edit', 'delete'])) {
             return $this->redirect(['action' => 'index']);
         }

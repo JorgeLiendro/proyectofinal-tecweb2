@@ -1,51 +1,65 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\Role> $roles
- */
-?>
-<div class="roles index content">
-    <?= $this->Html->link(__('New Role'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Roles') ?></h3>
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('nombre') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($roles as $role): ?>
-                <tr>
-                    <td><?= $this->Number->format($role->id) ?></td>
-                    <td><?= h($role->nombre) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $role->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $role->id]) ?>
-                        <?= $this->Form->postLink(
-                            __('Delete'),
-                            ['action' => 'delete', $role->id],
-                            [
-                                'method' => 'delete',
-                                'confirm' => __('Are you sure you want to delete # {0}?', $role->id),
-                            ]
-                        ) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="text-danger">Roles</h3>
+
+    <?= $this->Html->link(
+        ' Nuevo Rol',
+        ['action' => 'add'],
+        ['class' => 'btn btn-danger']
+    ) ?>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th><?= $this->Paginator->sort('id', 'ID') ?></th>
+                <th><?= $this->Paginator->sort('nombre', 'Nombre') ?></th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach ($roles as $role): ?>
+            <tr>
+                <td><?= $role->id ?></td>
+                <td><?= h($role->nombre) ?></td>
+                <td class="text-center">
+
+                    <?= $this->Html->link(
+                        'Ver',
+                        ['action' => 'view', $role->id],
+                        ['class' => 'btn btn-sm btn-primary']
+                    ) ?>
+
+                    <?= $this->Html->link(
+                        'Editar',
+                        ['action' => 'edit', $role->id],
+                        ['class' => 'btn btn-sm btn-warning']
+                    ) ?>
+
+                    <?= $this->Form->postLink(
+                        'Eliminar',
+                        ['action' => 'delete', $role->id],
+                        [
+                            'class' => 'btn btn-sm btn-danger',
+                            'confirm' => '¿Desea eliminar este rol?'
+                        ]
+                    ) ?>
+
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<!-- PAGINACIÓN -->
+<div class="d-flex justify-content-center">
+    <ul class="pagination">
+        <?= $this->Paginator->first('<<', ['class' => 'page-link']) ?>
+        <?= $this->Paginator->prev('<', ['class' => 'page-link']) ?>
+        <?= $this->Paginator->numbers(['class' => 'page-link']) ?>
+        <?= $this->Paginator->next('>', ['class' => 'page-link']) ?>
+        <?= $this->Paginator->last('>>', ['class' => 'page-link']) ?>
+    </ul>
 </div>

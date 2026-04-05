@@ -1,54 +1,98 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Reserva $reserva
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Reserva'), ['action' => 'edit', $reserva->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Reserva'), ['action' => 'delete', $reserva->id], ['confirm' => __('Are you sure you want to delete # {0}?', $reserva->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Reservas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Reserva'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column column-80">
-        <div class="reservas view content">
-            <h3><?= h($reserva->id) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('User') ?></th>
-                    <td><?= $reserva->hasValue('user') ? $this->Html->link($reserva->user->nombre, ['controller' => 'Users', 'action' => 'view', $reserva->user->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Recurso') ?></th>
-                    <td><?= $reserva->hasValue('recurso') ? $this->Html->link($reserva->recurso->nombre, ['controller' => 'Recursos', 'action' => 'view', $reserva->recurso->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Estado') ?></th>
-                    <td><?= h($reserva->estado) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($reserva->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Fechareserva') ?></th>
-                    <td><?= h($reserva->fechareserva) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Fechacreacion') ?></th>
-                    <td><?= h($reserva->fechacreacion) ?></td>
-                </tr>
-            </table>
-            <div class="text">
-                <strong><?= __('Observaciones') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($reserva->observaciones)); ?>
-                </blockquote>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+
+                <!-- HEADER -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-danger mb-0">
+                        Reserva #<?= $this->Number->format($reserva->id) ?>
+                    </h4>
+
+                    <?= $this->Html->link(
+                        '← Volver',
+                        ['action' => 'index'],
+                        ['class' => 'btn btn-outline-secondary btn-sm']
+                    ) ?>
+                </div>
+
+                <!-- DATOS -->
+                <table class="table table-bordered">
+                    <tbody>
+
+                        <tr>
+                            <th class="bg-light">Usuario</th>
+                            <td>
+                                <?= $reserva->hasValue('user') 
+                                    ? $this->Html->link(
+                                        $reserva->user->nombre,
+                                        ['controller' => 'Users', 'action' => 'view', $reserva->user->id]
+                                    ) 
+                                    : '' ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="bg-light">Recurso</th>
+                            <td>
+                                <?= $reserva->hasValue('recurso') 
+                                    ? $this->Html->link(
+                                        $reserva->recurso->nombre,
+                                        ['controller' => 'Recursos', 'action' => 'view', $reserva->recurso->id]
+                                    ) 
+                                    : '' ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="bg-light">Estado</th>
+                            <td><?= h($reserva->estado) ?></td>
+                        </tr>
+
+                        <tr>
+                            <th class="bg-light">Fecha Reserva</th>
+                            <td><?= h($reserva->fechareserva) ?></td>
+                        </tr>
+
+                        <tr>
+                            <th class="bg-light">Creado</th>
+                            <td><?= h($reserva->fechacreacion) ?></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <!-- OBSERVACIONES -->
+                <div class="mb-3">
+                    <strong>Observaciones</strong>
+                    <div class="border rounded p-2 bg-light">
+                        <?= $this->Text->autoParagraph(h($reserva->observaciones)); ?>
+                    </div>
+                </div>
+
+                <!-- BOTONES -->
+                <div class="d-flex justify-content-end gap-2">
+
+                    <?= $this->Html->link(
+                        'Editar',
+                        ['action' => 'edit', $reserva->id],
+                        ['class' => 'btn btn-warning']
+                    ) ?>
+
+                    <?= $this->Form->postLink(
+                        'Eliminar',
+                        ['action' => 'delete', $reserva->id],
+                        [
+                            'class' => 'btn btn-danger',
+                            'confirm' => '¿Seguro que deseas eliminar esta reserva?'
+                        ]
+                    ) ?>
+
+                </div>
+
             </div>
         </div>
+
     </div>
 </div>

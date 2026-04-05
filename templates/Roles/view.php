@@ -1,32 +1,58 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Role $role
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Role'), ['action' => 'edit', $role->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Role'), ['action' => 'delete', $role->id], ['confirm' => __('Are you sure you want to delete # {0}?', $role->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Roles'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Role'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+
+                <!-- HEADER -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-danger mb-0">
+                        <?= h($role->nombre) ?>
+                    </h4>
+
+                    <?= $this->Html->link(
+                        '← Volver',
+                        ['action' => 'index'],
+                        ['class' => 'btn btn-outline-secondary btn-sm']
+                    ) ?>
+                </div>
+
+                <!-- DATOS -->
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th class="bg-light">Nombre</th>
+                            <td><?= h($role->nombre) ?></td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">ID</th>
+                            <td><?= $this->Number->format($role->id) ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- BOTONES -->
+                <div class="d-flex justify-content-end gap-2">
+
+                    <?= $this->Html->link(
+                        'Editar',
+                        ['action' => 'edit', $role->id],
+                        ['class' => 'btn btn-warning']
+                    ) ?>
+
+                    <?= $this->Form->postLink(
+                        'Eliminar',
+                        ['action' => 'delete', $role->id],
+                        [
+                            'class' => 'btn btn-danger',
+                            'confirm' => '¿Seguro que deseas eliminar este rol?'
+                        ]
+                    ) ?>
+
+                </div>
+
+            </div>
         </div>
-    </aside>
-    <div class="column column-80">
-        <div class="roles view content">
-            <h3><?= h($role->nombre) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('Nombre') ?></th>
-                    <td><?= h($role->nombre) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($role->id) ?></td>
-                </tr>
-            </table>
-        </div>
+
     </div>
 </div>
