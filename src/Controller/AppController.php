@@ -56,9 +56,45 @@ class AppController extends Controller
     parent::beforeFilter($event);
 
     $session = $this->request->getSession();
+    $controller = $this->request->getParam('controller');
+    $action = $this->request->getParam('action');
 
-    if (!$session->check('Auth') && $this->request->getParam('action') !== 'login') {
+    // 🔐 permitir login y logout SIEMPRE
+    if (!$session->check('Auth') && !in_array($action, ['login', 'logout'])) {
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
+
+    // si no hay sesión, no seguir evaluando roles
+    if (!$session->check('Auth')) {
+        return;
+    }
+
+    $rol = $session->read('Auth.rol_id');
+
+    // 👤 CLIENTE
+    if ($rol == 2) {
+
+        // ❌ bloquear Users EXCEPTO logout
+        if ($controller == 'Users' && $action != 'logout') {
+            return $this->redirect(['controller' => 'Reservas', 'action' => 'index']);
+        }
+        
+        //bloquear recursos y roles
+        if (in_array($controller, ['Recursos', 'Roles'])) {
+            return $this->redirect(['controller' => 'Reservas', 'action' => 'index']);
+        }
+
+        // ❌ bloquear Recursos  
+        //if ($controller == 'Recursos') {
+        //    return $this->redirect(['controller' => 'Reservas', 'action' => 'index']);
+        //}
+
+        // ❌ bloquear editar y eliminar reservas
+        if ($controller == 'Reservas' && in_array($action, ['edit', 'delete'])) {
+            return $this->redirect(['action' => 'index']);
+        }
+    }
 }
+
+
 }

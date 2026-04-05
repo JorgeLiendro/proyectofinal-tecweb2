@@ -90,7 +90,7 @@
                         Hola, <strong><?= h($auth->nombre . ' ' . $auth->apellido) ?></strong>
                     </span>
 
-                    <?= $this->Html->link(
+                    <?= $this->Form->postLink(
                         'Salir',
                         ['controller' => 'Users', 'action' => 'logout'],
                         ['class' => 'btn btn-danger btn-sm']
