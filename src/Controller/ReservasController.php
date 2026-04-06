@@ -102,22 +102,80 @@ $reserva->detalle_reservas = $detalles;
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    
     public function edit($id = null)
-    {
-        $reserva = $this->Reservas->get($id, contain: []);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $reserva = $this->Reservas->patchEntity($reserva, $this->request->getData());
-            if ($this->Reservas->save($reserva)) {
-                $this->Flash->success(__('The reserva has been saved.'));
+{
+    $reserva = $this->Reservas->get($id, [
+        'contain' => ['DetalleReservas']
+    ]);
 
-                return $this->redirect(['action' => 'index']);
+    if ($this->request->is(['patch', 'post', 'put'])) {
+
+    $data = $this->request->getData();
+
+    $detalles = [];
+
+    if (!empty($data['detalle_reservas'])) {
+        foreach ($data['detalle_reservas'] as $item) {
+            if (!empty($item['recurso_id'])) {
+                $detalles[] = [
+                    'recurso_id' => $item['recurso_id']
+                ];
             }
-            $this->Flash->error(__('The reserva could not be saved. Please, try again.'));
         }
-        $users = $this->Reservas->Users->find('list', limit: 200)->all();
-        $recursos = $this->Reservas->DetalleReservas->Recursos->find('list', limit: 200)->all();
-        $this->set(compact('reserva', 'users', 'recursos'));
     }
+
+    // Obtener los IDs de los recursos actualmente en la base de datos
+    $recursosExistentes = $this->Reservas->DetalleReservas->find('list', [
+        'keyField' => 'id',
+        'valueField' => 'recurso_id'
+    ])->where(['reserva_id' => $id])->toArray();
+
+    // Obtener los IDs de los recursos seleccionados en el formulario
+    $recursosSeleccionados = !empty($detalles) ? array_column($detalles, 'recurso_id') : [];
+
+    // Eliminar los recursos que ya no están seleccionados
+    if (!empty($recursosSeleccionados)) {
+        $this->Reservas->DetalleReservas->deleteAll([
+            'reserva_id' => $id,
+            'NOT' => ['recurso_id IN' => $recursosSeleccionados]
+        ]);
+    } else {
+        // Si no hay recursos seleccionados, eliminar todos los detalles
+        $this->Reservas->DetalleReservas->deleteAll(['reserva_id' => $id]);
+    }
+
+    // Insertar los nuevos recursos seleccionados
+    $nuevosRecursos = array_filter($detalles, function ($detalle) use ($recursosExistentes) {
+        return !in_array($detalle['recurso_id'], $recursosExistentes);
+    });
+
+    foreach ($nuevosRecursos as &$detalle) {
+        $detalle['reserva_id'] = $id; // Asignar reserva_id
+    }
+
+    if (!empty($nuevosRecursos)) {
+        $nuevasEntidades = $this->Reservas->DetalleReservas->newEntities($nuevosRecursos);
+        $this->Reservas->DetalleReservas->saveMany($nuevasEntidades);
+    }
+
+    $reserva = $this->Reservas->patchEntity($reserva, $data, [
+        'associated' => ['DetalleReservas']
+    ]);
+
+    if ($this->Reservas->save($reserva)) {
+        $this->Flash->success('Reserva actualizada correctamente.');
+        return $this->redirect(['action' => 'index']);
+    } else {
+        $this->Flash->error('Error al actualizar la reserva.');
+    }
+}
+
+    $users = $this->Reservas->Users->find('list')->all();
+    $recursos = $this->Reservas->DetalleReservas->Recursos->find('list')->all();
+
+    $this->set(compact('reserva', 'users', 'recursos'));
+}
 
     /**
      * Delete method

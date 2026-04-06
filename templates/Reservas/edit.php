@@ -19,6 +19,7 @@
 
                 <?= $this->Form->create($reserva) ?>
 
+                <!-- USUARIO -->
                 <div class="mb-3">
                     <?= $this->Form->control('user_id', [
                         'class' => 'form-control',
@@ -27,14 +28,49 @@
                     ]) ?>
                 </div>
 
-                <div class="mb-3">
-                    <?= $this->Form->control('recurso_id', [
-                        'class' => 'form-control',
-                        'label' => 'Recurso',
-                        'options' => $recursos
-                    ]) ?>
-                </div>
+                <!-- RECURSOS (MULTI SELECCIÓN) -->
+<div class="mb-3">
+    <label class="form-label">Recursos</label>
 
+    <?php foreach ($recursos as $id => $nombre): ?>
+
+        <?php
+        // 🔥 IMPORTANTE: definir variable en cada vuelta
+        $detalleExistente = null;
+
+        if (!empty($reserva->detalle_reservas)) {
+            foreach ($reserva->detalle_reservas as $d) {
+                if ($d->recurso_id == $id) {
+                    $detalleExistente = $d;
+                    break;
+                }
+            }
+        }
+        ?>
+
+        <div class="form-check">
+            <input type="checkbox"
+                name="detalle_reservas[<?= $id ?>][recurso_id]"
+                value="<?= $id ?>"
+                class="form-check-input"
+                <?= ($detalleExistente !== null) ? 'checked' : '' ?>
+            >
+
+            <?php if ($detalleExistente !== null): ?>
+                <input type="hidden"
+                    name="detalle_reservas[<?= $id ?>][id]"
+                    value="<?= $detalleExistente->id ?>">
+            <?php endif; ?>
+
+            <label class="form-check-label">
+                <?= h($nombre) ?>
+            </label>
+        </div>
+
+    <?php endforeach; ?>
+</div>
+
+                <!-- FECHA -->
                 <div class="mb-3">
                     <?= $this->Form->control('fechareserva', [
                         'class' => 'form-control',
@@ -42,6 +78,7 @@
                     ]) ?>
                 </div>
 
+                <!-- ESTADO -->
                 <div class="mb-3">
                     <?= $this->Form->control('estado', [
                         'class' => 'form-control',
@@ -49,6 +86,7 @@
                     ]) ?>
                 </div>
 
+                <!-- FECHA CREACION -->
                 <div class="mb-3">
                     <?= $this->Form->control('fechacreacion', [
                         'class' => 'form-control',
@@ -57,6 +95,7 @@
                     ]) ?>
                 </div>
 
+                <!-- OBSERVACIONES -->
                 <div class="mb-3">
                     <?= $this->Form->control('observaciones', [
                         'class' => 'form-control',
