@@ -50,13 +50,8 @@
                 <!--  FORMULARIO PRINCIPAL -->
                 <?= $this->Form->create($reserva) ?>
 
-                <div class="mb-3">
-                    <?= $this->Form->control('user_id', [
-                        'class' => 'form-control',
-                        'label' => 'Usuario',
-                        'options' => $users
-                    ]) ?>
-                </div>
+                <!-- USUARIO (OCULTO) -->
+                <?= $this->Form->hidden('user_id', ['value' => $this->request->getSession()->read('Auth.id')]) ?>
 
                 <div class="mb-3">
                     <?= $this->Form->control('fechareserva', [

@@ -17,10 +17,19 @@ class ReservasController extends AppController
      */
     public function index()
     {
+        $session = $this->request->getSession();
+        $rol = $session->read('Auth.rol_id');
+        $userId = $session->read('Auth.id');
+
         $query = $this->Reservas->find()
             ->contain(['Users', 'DetalleReservas.Recursos']);
-        $reservas = $this->paginate($query);
 
+        // Si el usuario es cliente, filtrar por su ID
+        if ($rol == 2) {
+            $query->where(['Reservas.user_id' => $userId]);
+        }
+
+        $reservas = $this->paginate($query);
         $this->set(compact('reservas'));
     }
 
@@ -33,7 +42,20 @@ class ReservasController extends AppController
      */
     public function view($id = null)
     {
-        $reserva = $this->Reservas->get($id, contain: ['Users', 'DetalleReservas.Recursos']);
+        $session = $this->request->getSession();
+        $rol = $session->read('Auth.rol_id');
+        $userId = $session->read('Auth.id');
+
+        $reserva = $this->Reservas->get($id, [
+            'contain' => ['Users', 'DetalleReservas.Recursos']
+        ]);
+
+        // Si el usuario es cliente, verificar que la reserva le pertenece
+        if ($rol == 2 && $reserva->user_id != $userId) {
+            $this->Flash->error('No tienes permiso para acceder a esta reserva.');
+            return $this->redirect(['action' => 'index']);
+        }
+
         $this->set(compact('reserva'));
     }
 
@@ -43,57 +65,48 @@ class ReservasController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add()
-{
-    $reserva = $this->Reservas->newEmptyEntity();
+    {
+        $reserva = $this->Reservas->newEmptyEntity();
 
-    if ($this->request->is('post')) {
+        if ($this->request->is('post')) {
+            $session = $this->request->getSession();
+            $carrito = $session->read('Carrito') ?? [];
 
-        $session = $this->request->getSession();
-        $carrito = $session->read('Carrito') ?? [];
+            // Si no hay recursos, no guardar
+            if (empty($carrito)) {
+                $this->Flash->error('Debe agregar al menos un recurso');
+                return $this->redirect(['action' => 'add']);
+            }
 
-        //  si no hay recursos, no guardar
-        if (empty($carrito)) {
-            $this->Flash->error('Debe agregar al menos un recurso');
-            return $this->redirect(['action' => 'add']);
+            $data = $this->request->getData();
+            $data['user_id'] = $session->read('Auth.id'); // Asignar el usuario logueado
+
+            $reserva = $this->Reservas->patchEntity($reserva, $data);
+
+            // Crear los detalles de la reserva
+            $detallesData = [];
+            foreach ($carrito as $recursoId) {
+                $detallesData[] = [
+                    'recurso_id' => $recursoId
+                ];
+            }
+
+            $detalles = $this->Reservas->DetalleReservas->newEntities($detallesData);
+            $reserva->detalle_reservas = $detalles;
+
+            // Guardar la reserva con los recursos seleccionados
+            if ($this->Reservas->save($reserva, ['associated' => ['DetalleReservas']])) {
+                $session->delete('Carrito'); // Limpiar carrito
+                $this->Flash->success('Reserva creada correctamente.');
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error('Error al guardar la reserva.');
         }
 
-        $reserva = $this->Reservas->patchEntity($reserva, $this->request->getData());
-
-        // asignar usuario logueado (recomendado)
-        $reserva->user_id = $session->read('Auth.id');
-
-        //  crear detalle_reservas
-        $detallesData = [];
-
-foreach ($carrito as $recursoId) {
-    $detallesData[] = [
-        'recurso_id' => $recursoId
-    ];
-}
-
-// 🔥 convertir a entidades
-$detalles = $this->Reservas->DetalleReservas->newEntities($detallesData);
-
-$reserva->detalle_reservas = $detalles;
-
-        //  guardar TODO (maestro + detalle)
-        if ($this->Reservas->save($reserva, ['associated' => ['DetalleReservas']])) {
-
-            // limpiar carrito
-            $session->delete('Carrito');
-
-            $this->Flash->success('Reserva guardada correctamente');
-            return $this->redirect(['action' => 'index']);
-        }
-
-        $this->Flash->error('Error al guardar la reserva');
+        $recursos = $this->Reservas->DetalleReservas->Recursos->find('list')->all();
+        $this->set(compact('reserva', 'recursos'));
     }
-
-    $users = $this->Reservas->Users->find('list')->all();
-    $recursos = $this->Reservas->DetalleReservas->Recursos->find('list')->all();
-
-    $this->set(compact('reserva', 'users', 'recursos'));
-}
 
     /**
      * Edit method
