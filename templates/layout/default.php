@@ -78,13 +78,36 @@
 
     <!-- NAVBAR -->
     <nav class="navbar shadow-sm">
-        <div class="container d-flex justify-content-between">
+        <div class="container d-flex justify-content-between align-items-center">
 
-            <span class="fw-bold text-danger fs-5">Sistema</span>
+            <!-- IZQUIERDA -->
+            <div class="d-flex align-items-center gap-3">
+                <span class="fw-bold text-danger fs-5">Sistema</span>
 
-            <div>
                 <?php $auth = $this->request->getSession()->read('Auth'); ?>
-                
+
+                <?php if ($auth): ?>
+                    <?php $rol = $auth->rol_id; ?>
+
+                    <!-- MENÚ -->
+                    <div class="d-flex gap-2">
+
+                        <!-- SOLO ADMIN -->
+                        <?php if ($rol == 1): ?>
+                            <?= $this->Html->link('Usuarios', ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-outline-danger btn-sm']) ?>
+                            <?= $this->Html->link('Roles', ['controller' => 'Roles', 'action' => 'index'], ['class' => 'btn btn-outline-danger btn-sm']) ?>
+                            <?= $this->Html->link('Recursos', ['controller' => 'Recursos', 'action' => 'index'], ['class' => 'btn btn-outline-danger btn-sm']) ?>
+                        <?php endif; ?>
+
+                        <!-- TODOS -->
+                        <?= $this->Html->link('Reservas', ['controller' => 'Reservas', 'action' => 'index'], ['class' => 'btn btn-outline-danger btn-sm']) ?>
+
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <!-- DERECHA -->
+            <div>
                 <?php if ($auth): ?>
                     <span class="me-3">
                         Hola, <strong><?= h($auth->nombre . ' ' . $auth->apellido) ?></strong>

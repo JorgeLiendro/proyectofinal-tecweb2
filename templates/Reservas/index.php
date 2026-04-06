@@ -14,7 +14,7 @@
             <tr>
                 <th><?= $this->Paginator->sort('id', 'ID') ?></th>
                 <th><?= $this->Paginator->sort('user_id', 'Usuario') ?></th>
-                <th><?= $this->Paginator->sort('recurso_id', 'Recurso') ?></th>
+                <th><?= $this->Paginator->sort('recurso_id', 'Recursos') ?></th>
                 <th><?= $this->Paginator->sort('fechareserva', 'Fecha Reserva') ?></th>
                 <th><?= $this->Paginator->sort('estado', 'Estado') ?></th>
                 <th><?= $this->Paginator->sort('fechacreacion', 'Creado') ?></th>
@@ -29,21 +29,21 @@
 
                 <td>
                     <?= $reserva->hasValue('user') 
-                        ? $this->Html->link(
-                            $reserva->user->nombre,
-                            ['controller' => 'Users', 'action' => 'view', $reserva->user->id]
-                        ) 
-                        : '' ?>
+                    ? h($reserva->user->nombre)
+                    : '' ?>
                 </td>
 
                 <td>
-                    <?= $reserva->hasValue('recurso') 
-                        ? $this->Html->link(
-                            $reserva->recurso->nombre,
-                            ['controller' => 'Recursos', 'action' => 'view', $reserva->recurso->id]
-                        ) 
-                        : '' ?>
-                </td>
+    <?php
+    $nombres = [];
+
+    foreach ($reserva->detalle_reservas as $detalle) {
+        $nombres[] = $detalle->recurso->nombre;
+    }
+
+    echo implode(', ', $nombres);
+    ?>
+</td>
 
                 <td><?= h($reserva->fechareserva) ?></td>
                 <td><?= h($reserva->estado) ?></td>

@@ -48,10 +48,14 @@ class ReservasTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Recursos', [
-            'foreignKey' => 'recurso_id',
-            'joinType' => 'INNER',
+        
+
+        $this->hasMany('DetalleReservas', [
+            'foreignKey' => 'reserva_id',
+            'saveStrategy' => 'replace'
         ]);
+
+        
     }
 
     /**
@@ -66,9 +70,7 @@ class ReservasTable extends Table
             ->integer('user_id')
             ->notEmptyString('user_id');
 
-        $validator
-            ->integer('recurso_id')
-            ->notEmptyString('recurso_id');
+        
 
         $validator
             ->date('fechareserva')
@@ -101,7 +103,7 @@ class ReservasTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'), ['errorField' => 'user_id']);
-        $rules->add($rules->existsIn(['recurso_id'], 'Recursos'), ['errorField' => 'recurso_id']);
+       // $rules->add($rules->existsIn(['recurso_id'], 'Recursos'), ['errorField' => 'recurso_id']);
 
         return $rules;
     }
