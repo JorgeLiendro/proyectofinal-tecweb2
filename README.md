@@ -1,4 +1,4 @@
-# 📌 Sistema de Gestión de Reservas
+#  Sistema de Gestión de Reservas
 
 ## 📝 Descripción
 Sistema web full-stack desarrollado con **CakePHP 5.3.3** para la gestión de reservas de accesorios.  
@@ -6,17 +6,17 @@ Previene conflictos de doble reserva mediante validación automática de solapam
 
 ---
 
-## 🚀 Características principales
+##  Características principales
 
-- 🔐 Autenticación con roles (Cliente / Admin)
-- 📅 CRUD completo de reservas con validación de conflictos
-- 📦 Catálogo de productos con inventario
-- 🌐 Multilingüe (ES/EN)
-- 👥 CRUD completo de usuarios, roles y recursos (productos)
+-  Autenticación con roles (Cliente / Admin)
+-  CRUD completo de reservas con validación de conflictos
+-  Catálogo de productos con inventario
+-  Multilingüe (ESPAÑOL/INGLÉS)
+-  CRUD completo de usuarios, roles y recursos 
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+##  Tecnologías utilizadas
 
 - **Frontend:** Bootstrap 5, HTML, CSS  
 - **Backend:** CakePHP 5.3.3, PHP 8.4 (Arquitectura MVC)  
@@ -94,7 +94,7 @@ cd proyectofinal-tecweb2
 composer install
 ```
 
-### 4️⃣ Configurar entorno
+### 4️⃣ Configurar entorno de Base de datos
 - Copiar el archivo:
 ```bash
 cp config/app_local.example.php config/app_local.php
@@ -103,10 +103,42 @@ cp config/app_local.example.php config/app_local.php
 
 ### 5️⃣ Ejecutar el servidor
 ```bash
-bin/cake server
+bin/cake server -p 8765
 ```
+-Abrir en el navegador: http://localhost:8765
 
 ---
+### Despliegue con PODMAN
+1. Crear carpeta
+- mkdir devops
+- cd devops
+2. Clonar Proyecto dentro de /devops
+```bash
+git clone https://github.com/JorgeLiendro/proyectofinal-tecweb2.git
+```
+3. Dentro de devops crear archivos: dockerfile y compose.yml
+Dockerfile
+```bash
+codigo dockerfile
+```
+compose.yml
+```bash
+codigo compose.yml
+```
+4.Construir imagen
+```bash
+podman build -t app_ef .
+```
+5. Ejecutar contenedor
+```bash
+podman-compose up
+```
+6. Acceder
+http://localhost:8080
+
+Comandos útiles para podman
+
+
 
 ## 👨‍💻 Autor
 - Jorge Liendro
