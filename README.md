@@ -1,63 +1,68 @@
-Sistema de Gestión de Reservas 
+# 📌 Sistema de Gestión de Reservas
 
-Descripción
-Sistema web full-stack desarrollado con CakePHP 5.3.3 para la gestión de reservas de accesorios . Previene conflictos de doble reserva mediante validación automática de solapamientos temporales y ofrece gestión de recursos, roles y usuarios.
+## 📝 Descripción
+Sistema web full-stack desarrollado con **CakePHP 5.3.3** para la gestión de reservas de accesorios.  
+Previene conflictos de doble reserva mediante validación automática de solapamientos temporales y ofrece gestión de recursos, roles y usuarios.
 
-Características principales:
+---
 
-Autenticación con roles (Cliente/Admin)
+## 🚀 Características principales
 
-CRUD completo de reservas con validación de conflictos
+- 🔐 Autenticación con roles (Cliente / Admin)
+- 📅 CRUD completo de reservas con validación de conflictos
+- 📦 Catálogo de productos con inventario
+- 🌐 Multilingüe (ES/EN)
+- 👥 CRUD completo de usuarios, roles y recursos (productos)
 
-Catálogo de productos con inventario
+---
 
-Multilingüe (ES/EN)
+## 🛠️ Tecnologías utilizadas
 
-CRUD completo de usuarios, roles y recursos(productos)
+- **Frontend:** Bootstrap 5, HTML, CSS  
+- **Backend:** CakePHP 5.3.3, PHP 8.4 (Arquitectura MVC)  
+- **Base de datos:** MariaDB  
+- **Contenedores:** Podman  
 
-Tecnologías utilizadas
-Frontend: Bootstrap 5, HTML, CSS.
-Backend: CakePHP 5.3.3, PHP 8.4, Patrón de arquitectura MVC
-Base de datos: MariaDB
-Contenedores: Podman
+---
 
-Estructura del Proyecto
+## 📁 Estructura del Proyecto
 
+```bash
 cakephp-entregablefin/
-├── **APP_EF/**                    
+├── APP_EF/
 │   ├── config/
 │   ├── logs/
 │   ├── plugins/
 │   └── resources/
 ├── src/
-│   ├── **Controller/**        
+│   ├── Controller/
 │   │   ├── Cell/
 │   │   ├── DetalleReservas/
 │   │   ├── Email/
 │   │   ├── Layout/
 │   │   ├── Pages/
-│   │   ├── **RecursosController.php**
-│   │   ├── **ReservasController.php**     
+│   │   ├── RecursosController.php
+│   │   ├── ReservasController.php
 │   │   ├── RolesController.php
 │   │   └── UsersController.php
-│   ├── **Model/**              
+│   ├── Model/
 │   │   ├── cell/
-│   │   ├── **DetalleReservasTable.php**
-│   │   ├── **RecursosTable.php**
-│   │   ├── **ReservasTable.php**        
+│   │   ├── DetalleReservasTable.php
+│   │   ├── RecursosTable.php
+│   │   ├── ReservasTable.php
 │   │   ├── RolesTable.php
-│   │   └── **UsersTable.php**
-│   ├── **templates/**          
+│   │   └── UsersTable.php
+│   ├── templates/
 │   │   ├── cell/
-│   │   ├── **DetalleReservas/**
+│   │   ├── DetalleReservas/
 │   │   ├── email/
-│   │   ├── **layout/**
+│   │   ├── layout/
 │   │   ├── Pages/
-│   │   ├── **recursos/**
-│   │   ├── **reservas/**             
+│   │   ├── recursos/
+│   │   ├── reservas/
 │   │   │   ├── add.ctp
 │   │   │   ├── edit.ctp
-│   │   │   ├── index.ctp              
+│   │   │   ├── index.ctp
 │   │   │   └── view.ctp
 │   │   ├── Roles/
 │   │   └── users/
@@ -68,8 +73,40 @@ cakephp-entregablefin/
 ├── webroot/
 ├── composer.json
 └── index.php
+```
 
+---
 
-Instalación del proyecto
-- Clonar el proyecto:
+## ⚙️ Instalación del proyecto
+
+### 1️⃣ Clonar el repositorio
+```bash
 git clone https://github.com/JorgeLiendro/proyectofinal-tecweb2.git
+```
+
+### 2️⃣ Entrar al proyecto
+```bash
+cd proyectofinal-tecweb2
+```
+
+### 3️⃣ Instalar dependencias
+```bash
+composer install
+```
+
+### 4️⃣ Configurar entorno
+- Copiar el archivo:
+```bash
+cp config/app_local.example.php config/app_local.php
+```
+- Configurar la conexión a la base de datos en `app_local.php`
+
+### 5️⃣ Ejecutar el servidor
+```bash
+bin/cake server
+```
+
+---
+
+## 👨‍💻 Autor
+- Jorge Liendro
