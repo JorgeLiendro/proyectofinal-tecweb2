@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="text-danger">Usuarios</h3>
+    <h3 class="text-danger"><?= __('Usuarios') ?></h3>
 
     <?= $this->Html->link(
-        ' Nuevo Usuario',
+        __('Nuevo Usuario'),
         ['action' => 'add'],
         ['class' => 'btn btn-danger']
     ) ?>
@@ -12,14 +12,14 @@
     <table class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id', 'ID') ?></th>
-                <th><?= $this->Paginator->sort('nombre', 'Nombre') ?></th>
-                <th><?= $this->Paginator->sort('apellido', 'Apellido') ?></th>
-                <th><?= $this->Paginator->sort('correo', 'Correo') ?></th>
-                <th><?= $this->Paginator->sort('created', 'Creado') ?></th>
-                <th><?= $this->Paginator->sort('language', 'Idioma') ?></th>
-                <th><?= $this->Paginator->sort('direccion', 'Dirección') ?></th>
-                <th class="text-center ">Acciones</th>
+                <th><?= $this->Paginator->sort('id', __('ID')) ?></th>
+                <th><?= $this->Paginator->sort('nombre', __('Nombre')) ?></th>
+                <th><?= $this->Paginator->sort('apellido', __('Apellido')) ?></th>
+                <th><?= $this->Paginator->sort('correo', __('Correo')) ?></th>
+                <th><?= $this->Paginator->sort('created', __('Creado')) ?></th>
+                <th><?= $this->Paginator->sort('language', __('Idioma')) ?></th>
+                <th><?= $this->Paginator->sort('direccion', __('Dirección')) ?></th>
+                <th class="text-center"><?= __('Acciones') ?></th>
             </tr>
         </thead>
 
@@ -35,16 +35,24 @@
                 <td><?= h($user->direccion) ?></td>
                 <td class="text-center">
 
-                    <?= $this->Html->link('Ver', ['action' => 'view', $user->id], ['class' => 'btn btn-sm btn-primary']) ?>
+                    <?= $this->Html->link(
+                        __('Ver'),
+                        ['action' => 'view', $user->id],
+                        ['class' => 'btn btn-sm btn-primary']
+                    ) ?>
 
-                    <?= $this->Html->link('Editar', ['action' => 'edit', $user->id], ['class' => 'btn btn-sm btn-warning']) ?>
+                    <?= $this->Html->link(
+                        __('Editar'),
+                        ['action' => 'edit', $user->id],
+                        ['class' => 'btn btn-sm btn-warning']
+                    ) ?>
 
                     <?= $this->Form->postLink(
-                        'Eliminar',
+                        __('Eliminar'),
                         ['action' => 'delete', $user->id],
                         [
                             'class' => 'btn btn-sm btn-danger',
-                            'confirm' => 'Desea eliminar este usuario?'
+                            'confirm' => __('¿Desea eliminar este usuario?')
                         ]
                     ) ?>
 

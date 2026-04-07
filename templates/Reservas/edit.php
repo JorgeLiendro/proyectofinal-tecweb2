@@ -7,11 +7,11 @@
                 <!-- HEADER -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-danger mb-0">
-                        Editar Reserva
+                        <?= __('Editar Reserva') ?>
                     </h4>
 
                     <?= $this->Html->link(
-                        '← Volver',
+                        __('← Volver'),
                         ['action' => 'index'],
                         ['class' => 'btn btn-outline-secondary btn-sm']
                     ) ?>
@@ -23,58 +23,57 @@
                 <div class="mb-3">
                     <?= $this->Form->control('user_id', [
                         'class' => 'form-control',
-                        'label' => 'Usuario',
+                        'label' => __('Usuario'),
                         'options' => $users
                     ]) ?>
                 </div>
 
-                <!-- RECURSOS (MULTI SELECCIÓN) -->
-<div class="mb-3">
-    <label class="form-label">Recursos</label>
+                <!-- RECURSOS -->
+                <div class="mb-3">
+                    <label class="form-label"><?= __('Recursos') ?></label>
 
-    <?php foreach ($recursos as $id => $nombre): ?>
+                    <?php foreach ($recursos as $id => $nombre): ?>
 
-        <?php
-        // 🔥 IMPORTANTE: definir variable en cada vuelta
-        $detalleExistente = null;
+                        <?php
+                        $detalleExistente = null;
 
-        if (!empty($reserva->detalle_reservas)) {
-            foreach ($reserva->detalle_reservas as $d) {
-                if ($d->recurso_id == $id) {
-                    $detalleExistente = $d;
-                    break;
-                }
-            }
-        }
-        ?>
+                        if (!empty($reserva->detalle_reservas)) {
+                            foreach ($reserva->detalle_reservas as $d) {
+                                if ($d->recurso_id == $id) {
+                                    $detalleExistente = $d;
+                                    break;
+                                }
+                            }
+                        }
+                        ?>
 
-        <div class="form-check">
-            <input type="checkbox"
-                name="detalle_reservas[<?= $id ?>][recurso_id]"
-                value="<?= $id ?>"
-                class="form-check-input"
-                <?= ($detalleExistente !== null) ? 'checked' : '' ?>
-            >
+                        <div class="form-check">
+                            <input type="checkbox"
+                                name="detalle_reservas[<?= $id ?>][recurso_id]"
+                                value="<?= $id ?>"
+                                class="form-check-input"
+                                <?= ($detalleExistente !== null) ? 'checked' : '' ?>
+                            >
 
-            <?php if ($detalleExistente !== null): ?>
-                <input type="hidden"
-                    name="detalle_reservas[<?= $id ?>][id]"
-                    value="<?= $detalleExistente->id ?>">
-            <?php endif; ?>
+                            <?php if ($detalleExistente !== null): ?>
+                                <input type="hidden"
+                                    name="detalle_reservas[<?= $id ?>][id]"
+                                    value="<?= $detalleExistente->id ?>">
+                            <?php endif; ?>
 
-            <label class="form-check-label">
-                <?= h($nombre) ?>
-            </label>
-        </div>
+                            <label class="form-check-label">
+                                <?= h($nombre) ?>
+                            </label>
+                        </div>
 
-    <?php endforeach; ?>
-</div>
+                    <?php endforeach; ?>
+                </div>
 
                 <!-- FECHA -->
                 <div class="mb-3">
                     <?= $this->Form->control('fechareserva', [
                         'class' => 'form-control',
-                        'label' => 'Fecha Reserva'
+                        'label' => __('Fecha Reserva')
                     ]) ?>
                 </div>
 
@@ -82,7 +81,7 @@
                 <div class="mb-3">
                     <?= $this->Form->control('estado', [
                         'class' => 'form-control',
-                        'label' => 'Estado'
+                        'label' => __('Estado')
                     ]) ?>
                 </div>
 
@@ -90,7 +89,7 @@
                 <div class="mb-3">
                     <?= $this->Form->control('fechacreacion', [
                         'class' => 'form-control',
-                        'label' => 'Fecha Creación',
+                        'label' => __('Fecha Creación'),
                         'empty' => true
                     ]) ?>
                 </div>
@@ -99,7 +98,7 @@
                 <div class="mb-3">
                     <?= $this->Form->control('observaciones', [
                         'class' => 'form-control',
-                        'label' => 'Observaciones',
+                        'label' => __('Observaciones'),
                         'type' => 'textarea'
                     ]) ?>
                 </div>
@@ -108,15 +107,15 @@
                 <div class="d-flex justify-content-between mt-3">
 
                     <?= $this->Form->postLink(
-                        'Eliminar',
+                        __('Eliminar'),
                         ['action' => 'delete', $reserva->id],
                         [
                             'class' => 'btn btn-outline-danger',
-                            'confirm' => '¿Seguro que deseas eliminar esta reserva?'
+                            'confirm' => __('¿Seguro que deseas eliminar esta reserva?')
                         ]
                     ) ?>
 
-                    <?= $this->Form->button('Actualizar', [
+                    <?= $this->Form->button(__('Actualizar'), [
                         'class' => 'btn btn-danger px-4'
                     ]) ?>
 

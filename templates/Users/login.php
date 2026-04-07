@@ -20,6 +20,14 @@
                 'required' => true
             ]) ?>
         </div>
+        <?= $this->Form->control('idioma', [
+    'type' => 'select',
+    'options' => [
+        'es' => 'Español',
+        'en' => 'English'
+    ],
+    'label' => 'Idioma'
+]) ?>
 
         <?= $this->Form->button('Ingresar', ['class' => 'btn-login']) ?>
 

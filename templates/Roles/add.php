@@ -6,10 +6,10 @@
 
                 <!-- HEADER -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-danger mb-0">Nuevo Rol</h4>
+                    <h4 class="text-danger mb-0"><?= __('Nuevo Rol') ?></h4>
 
                     <?= $this->Html->link(
-                        '← Volver',
+                        __('← Volver'),
                         ['action' => 'index'],
                         ['class' => 'btn btn-outline-secondary btn-sm']
                     ) ?>
@@ -20,14 +20,14 @@
                 <div class="mb-3">
                     <?= $this->Form->control('nombre', [
                         'class' => 'form-control',
-                        'label' => 'Nombre',
-                        'placeholder' => 'Ingrese el nombre del rol'
+                        'label' => __('Nombre'),
+                        'placeholder' => __('Ingrese el nombre del rol')
                     ]) ?>
                 </div>
 
                 <!-- BOTÓN -->
                 <div class="d-flex justify-content-end">
-                    <?= $this->Form->button('Guardar', [
+                    <?= $this->Form->button(__('Guardar'), [
                         'class' => 'btn btn-danger px-4'
                     ]) ?>
                 </div>

@@ -1,0 +1,465 @@
+msgid "Usuarios"
+msgstr "Users"
+
+msgid "Nuevo Usuario"
+msgstr "New User"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Apellido"
+msgstr "Last Name"
+
+msgid "Correo"
+msgstr "Email"
+
+msgid "Creado"
+msgstr "Created"
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Dirección"
+msgstr "Address"
+
+msgid "Acciones"
+msgstr "Actions"
+
+msgid "Ver"
+msgstr "View"
+
+msgid "Editar"
+msgstr "Edit"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "¿Desea eliminar este usuario?"
+msgstr "Do you want to delete this user?"
+
+msgid "Reservas"
+msgstr "Reservations"
+
+msgid "Nueva Reserva"
+msgstr "New Reservation"
+
+msgid "Usuario"
+msgstr "User"
+
+msgid "Recursos"
+msgstr "Resources"
+
+msgid "Fecha Reserva"
+msgstr "Reservation Date"
+
+msgid "Estado"
+msgstr "Status"
+
+msgid "Creado"
+msgstr "Created"
+
+msgid "Acciones"
+msgstr "Actions"
+
+msgid "¿Desea eliminar esta reserva?"
+msgstr "Do you want to delete this reservation?"
+
+msgid "Roles"
+msgstr "Roles"
+
+msgid "Nuevo Rol"
+msgstr "New Role"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Acciones"
+msgstr "Actions"
+
+msgid "¿Desea eliminar este rol?"
+msgstr "Do you want to delete this role?"
+
+msgid "Recursos"
+msgstr "Resources"
+
+msgid "Nuevo Recurso"
+msgstr "New Resource"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Fecha Creación"
+msgstr "Creation Date"
+
+msgid "Acciones"
+msgstr "Actions"
+
+msgid "¿Desea eliminar este recurso?"
+msgstr "Do you want to delete this resource?"
+
+
+msgid "Nuevo Rol"
+msgstr "New Role"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Ingrese el nombre del rol"
+msgstr "Enter the role name"
+
+msgid "Guardar"
+msgstr "Save"
+
+msgid "Nuevo Usuario"
+msgstr "New User"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Ingrese el nombre"
+msgstr "Enter the name"
+
+msgid "Apellido"
+msgstr "Last Name"
+
+msgid "Ingrese el apellido"
+msgstr "Enter the last name"
+
+msgid "Correo"
+msgstr "Email"
+
+msgid "Contraseña"
+msgstr "Password"
+
+msgid "Ingrese la contraseña"
+msgstr "Enter the password"
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Dirección"
+msgstr "Address"
+
+msgid "Ingrese la dirección"
+msgstr "Enter the address"
+
+msgid "Guardar"
+msgstr "Save"
+
+msgid "Nuevo Recurso"
+msgstr "New Resource"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Ingrese el nombre del recurso"
+msgstr "Enter the resource name"
+
+msgid "Descripción"
+msgstr "Description"
+
+msgid "Ingrese la descripción..."
+msgstr "Enter the description..."
+
+msgid "Fecha Creación"
+msgstr "Creation Date"
+
+msgid "Guardar"
+msgstr "Save"
+
+msgid "Nueva Reserva"
+msgstr "New Reservation"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Seleccionar recurso"
+msgstr "Select resource"
+
+msgid "Agregar al carrito"
+msgstr "Add to cart"
+
+msgid "Carrito"
+msgstr "Cart"
+
+msgid "Recurso no encontrado"
+msgstr "Resource not found"
+
+msgid "Fecha Reserva"
+msgstr "Reservation Date"
+
+msgid "Estado"
+msgstr "Status"
+
+msgid "Fecha Creación"
+msgstr "Creation Date"
+
+msgid "Observaciones"
+msgstr "Observations"
+
+msgid "Ingrese observaciones..."
+msgstr "Enter observations..."
+
+msgid "Guardar"
+msgstr "Save"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Apellido"
+msgstr "Last Name"
+
+msgid "Correo"
+msgstr "Email"
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Dirección"
+msgstr "Address"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Creado"
+msgstr "Created"
+
+msgid "Modificado"
+msgstr "Modified"
+
+msgid "Editar"
+msgstr "Edit"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "¿Seguro que deseas eliminar este usuario?"
+msgstr "Are you sure you want to delete this user?"
+
+msgid "Editar Usuario"
+msgstr "Edit User"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Apellido"
+msgstr "Last Name"
+
+msgid "Correo"
+msgstr "Email"
+
+msgid "Contraseña"
+msgstr "Password"
+
+msgid "Dejar vacío para no cambiar"
+msgstr "Leave blank to keep current password"
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Dirección"
+msgstr "Address"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "Actualizar"
+msgstr "Update"
+
+msgid "¿Seguro que deseas eliminar este usuario?"
+msgstr "Are you sure you want to delete this user?"
+
+msgid "Editar Rol"
+msgstr "Edit Role"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "Actualizar"
+msgstr "Update"
+
+msgid "¿Seguro que deseas eliminar este rol?"
+msgstr "Are you sure you want to delete this role?"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Editar"
+msgstr "Edit"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "¿Seguro que deseas eliminar este rol?"
+msgstr "Are you sure you want to delete this role?"
+
+msgid "Reserva #{0}"
+msgstr "Reservation #{0}"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Usuario"
+msgstr "User"
+
+msgid "Recurso"
+msgstr "Resource"
+
+msgid "Estado"
+msgstr "Status"
+
+msgid "Fecha Reserva"
+msgstr "Reservation Date"
+
+msgid "Creado"
+msgstr "Created"
+
+msgid "Observaciones"
+msgstr "Observations"
+
+msgid "Editar"
+msgstr "Edit"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "¿Seguro que deseas eliminar esta reserva?"
+msgstr "Are you sure you want to delete this reservation?"
+
+msgid "Editar Reserva"
+msgstr "Edit Reservation"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Usuario"
+msgstr "User"
+
+msgid "Recursos"
+msgstr "Resources"
+
+msgid "Fecha Reserva"
+msgstr "Reservation Date"
+
+msgid "Estado"
+msgstr "Status"
+
+msgid "Fecha Creación"
+msgstr "Creation Date"
+
+msgid "Observaciones"
+msgstr "Observations"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "Actualizar"
+msgstr "Update"
+
+msgid "¿Seguro que deseas eliminar esta reserva?"
+msgstr "Are you sure you want to delete this reservation?"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Fecha Creación"
+msgstr "Creation Date"
+
+msgid "Descripción"
+msgstr "Description"
+
+msgid "Reservas relacionadas"
+msgstr "Related reservations"
+
+msgid "Usuario"
+msgstr "User"
+
+msgid "Fecha Reserva"
+msgstr "Reservation Date"
+
+msgid "Estado"
+msgstr "Status"
+
+msgid "Creado"
+msgstr "Created"
+
+msgid "Observaciones"
+msgstr "Observations"
+
+msgid "Acciones"
+msgstr "Actions"
+
+msgid "Ver"
+msgstr "View"
+
+msgid "Editar"
+msgstr "Edit"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "¿Eliminar esta reserva?"
+msgstr "Delete this reservation?"
+
+msgid "No hay reservas relacionadas."
+msgstr "No related reservations."
+
+msgid "¿Seguro que deseas eliminar este recurso?"
+msgstr "Are you sure you want to delete this resource?"
+
+msgid "Editar Recurso"
+msgstr "Edit Resource"
+
+msgid "← Volver"
+msgstr "← Back"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Descripción"
+msgstr "Description"
+
+msgid "Fecha Creación"
+msgstr "Creation Date"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "Actualizar"
+msgstr "Update"
+
+msgid "¿Seguro que deseas eliminar este recurso?"
+msgstr "Are you sure you want to delete this resource?"

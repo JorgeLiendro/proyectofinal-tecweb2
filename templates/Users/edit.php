@@ -7,11 +7,11 @@
                 <!-- HEADER -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-danger mb-0">
-                         Editar Usuario
+                        <?= __('Editar Usuario') ?>
                     </h4>
 
                     <?= $this->Html->link(
-                        '← Volver',
+                        __('← Volver'),
                         ['action' => 'index'],
                         ['class' => 'btn btn-outline-secondary btn-sm']
                     ) ?>
@@ -22,21 +22,21 @@
                 <div class="mb-3">
                     <?= $this->Form->control('nombre', [
                         'class' => 'form-control',
-                        'label' => 'Nombre'
+                        'label' => __('Nombre')
                     ]) ?>
                 </div>
 
                 <div class="mb-3">
                     <?= $this->Form->control('apellido', [
                         'class' => 'form-control',
-                        'label' => 'Apellido'
+                        'label' => __('Apellido')
                     ]) ?>
                 </div>
 
                 <div class="mb-3">
                     <?= $this->Form->control('correo', [
                         'class' => 'form-control',
-                        'label' => 'Correo'
+                        'label' => __('Correo')
                     ]) ?>
                 </div>
 
@@ -44,22 +44,22 @@
                     <?= $this->Form->control('password', [
                         'class' => 'form-control',
                         'type' => 'password',
-                        'label' => 'Contraseña',
-                        'placeholder' => 'Dejar vacío para no cambiar'
+                        'label' => __('Contraseña'),
+                        'placeholder' => __('Dejar vacío para no cambiar')
                     ]) ?>
                 </div>
 
                 <div class="mb-3">
                     <?= $this->Form->control('language', [
                         'class' => 'form-control',
-                        'label' => 'Idioma'
+                        'label' => __('Idioma')
                     ]) ?>
                 </div>
 
                 <div class="mb-3">
                     <?= $this->Form->control('direccion', [
                         'class' => 'form-control',
-                        'label' => 'Dirección'
+                        'label' => __('Dirección')
                     ]) ?>
                 </div>
 
@@ -67,15 +67,15 @@
                 <div class="d-flex justify-content-between mt-3">
 
                     <?= $this->Form->postLink(
-                        'Eliminar',
+                        __('Eliminar'),
                         ['action' => 'delete', $user->id],
                         [
                             'class' => 'btn btn-outline-danger',
-                            'confirm' => '¿Seguro que deseas eliminar este usuario?'
+                            'confirm' => __('¿Seguro que deseas eliminar este usuario?')
                         ]
                     ) ?>
 
-                    <?= $this->Form->button('Actualizar', [
+                    <?= $this->Form->button(__('Actualizar'), [
                         'class' => 'btn btn-danger px-4'
                     ]) ?>
 

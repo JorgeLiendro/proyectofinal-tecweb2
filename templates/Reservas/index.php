@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="text-danger">Reservas</h3>
+    <h3 class="text-danger"><?= __('Reservas') ?></h3>
 
     <?= $this->Html->link(
-        ' Nueva Reserva',
+        __('Nueva Reserva'),
         ['action' => 'add'],
         ['class' => 'btn btn-danger']
     ) ?>
@@ -12,13 +12,13 @@
     <table class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id', 'ID') ?></th>
-                <th><?= $this->Paginator->sort('user_id', 'Usuario') ?></th>
-                <th><?= $this->Paginator->sort('recurso_id', 'Recursos') ?></th>
-                <th><?= $this->Paginator->sort('fechareserva', 'Fecha Reserva') ?></th>
-                <th><?= $this->Paginator->sort('estado', 'Estado') ?></th>
-                <th><?= $this->Paginator->sort('fechacreacion', 'Creado') ?></th>
-                <th class="text-center">Acciones</th>
+                <th><?= $this->Paginator->sort('id', __('ID')) ?></th>
+                <th><?= $this->Paginator->sort('user_id', __('Usuario')) ?></th>
+                <th><?= $this->Paginator->sort('recurso_id', __('Recursos')) ?></th>
+                <th><?= $this->Paginator->sort('fechareserva', __('Fecha Reserva')) ?></th>
+                <th><?= $this->Paginator->sort('estado', __('Estado')) ?></th>
+                <th><?= $this->Paginator->sort('fechacreacion', __('Creado')) ?></th>
+                <th class="text-center"><?= __('Acciones') ?></th>
             </tr>
         </thead>
 
@@ -29,21 +29,21 @@
 
                 <td>
                     <?= $reserva->hasValue('user') 
-                    ? h($reserva->user->nombre)
-                    : '' ?>
+                        ? h($reserva->user->nombre)
+                        : '' ?>
                 </td>
 
                 <td>
-    <?php
-    $nombres = [];
+                    <?php
+                    $nombres = [];
 
-    foreach ($reserva->detalle_reservas as $detalle) {
-        $nombres[] = $detalle->recurso->nombre;
-    }
+                    foreach ($reserva->detalle_reservas as $detalle) {
+                        $nombres[] = $detalle->recurso->nombre;
+                    }
 
-    echo implode(', ', $nombres);
-    ?>
-</td>
+                    echo implode(', ', $nombres);
+                    ?>
+                </td>
 
                 <td><?= h($reserva->fechareserva) ?></td>
                 <td><?= h($reserva->estado) ?></td>
@@ -52,23 +52,23 @@
                 <td class="text-center">
 
                     <?= $this->Html->link(
-                        'Ver',
+                        __('Ver'),
                         ['action' => 'view', $reserva->id],
                         ['class' => 'btn btn-sm btn-primary']
                     ) ?>
 
                     <?= $this->Html->link(
-                        'Editar',
+                        __('Editar'),
                         ['action' => 'edit', $reserva->id],
                         ['class' => 'btn btn-sm btn-warning']
                     ) ?>
 
                     <?= $this->Form->postLink(
-                        'Eliminar',
+                        __('Eliminar'),
                         ['action' => 'delete', $reserva->id],
                         [
                             'class' => 'btn btn-sm btn-danger',
-                            'confirm' => '¿Desea eliminar esta reserva?'
+                            'confirm' => __('¿Desea eliminar esta reserva?')
                         ]
                     ) ?>
 

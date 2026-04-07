@@ -6,71 +6,73 @@
 
                 <!-- HEADER -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-danger mb-0">Nueva Reserva</h4>
+                    <h4 class="text-danger mb-0"><?= __('Nueva Reserva') ?></h4>
 
                     <?= $this->Html->link(
-                        '← Volver',
+                        __('← Volver'),
                         ['action' => 'index'],
                         ['class' => 'btn btn-outline-secondary btn-sm']
                     ) ?>
                 </div>
 
-                <!--  FORMULARIO CARRITO (SEPARADO) -->
+                <!-- FORMULARIO CARRITO -->
                 <?= $this->Form->create(null, ['url' => ['action' => 'agregar']]) ?>
 
                 <div class="mb-3">
                     <?= $this->Form->control('recurso_id', [
                         'options' => $recursos,
-                        'label' => 'Seleccionar recurso',
+                        'label' => __('Seleccionar recurso'),
                         'class' => 'form-control'
                     ]) ?>
                 </div>
 
-                <?= $this->Form->button('Agregar al carrito', [
+                <?= $this->Form->button(__('Agregar al carrito'), [
                     'class' => 'btn btn-secondary mb-3'
                 ]) ?>
 
                 <?= $this->Form->end() ?>
 
-                <!--  MOSTRAR CARRITO -->
+                <!-- MOSTRAR CARRITO -->
                 <?php
                 $carrito = $this->request->getSession()->read('Carrito') ?? [];
                 $recursosLista = $recursos->toArray();
                 ?>
 
-                <h5>Carrito</h5>
+                <h5><?= __('Carrito') ?></h5>
                 <ul>
                     <?php foreach ($carrito as $item): ?>
-                        <li><?= $recursosLista[$item] ?? 'Recurso no encontrado' ?></li>
+                        <li><?= $recursosLista[$item] ?? __('Recurso no encontrado') ?></li>
                     <?php endforeach; ?>
                 </ul>
 
                 <hr>
 
-                <!--  FORMULARIO PRINCIPAL -->
+                <!-- FORMULARIO PRINCIPAL -->
                 <?= $this->Form->create($reserva) ?>
 
                 <!-- USUARIO (OCULTO) -->
-                <?= $this->Form->hidden('user_id', ['value' => $this->request->getSession()->read('Auth.id')]) ?>
+                <?= $this->Form->hidden('user_id', [
+                    'value' => $this->request->getSession()->read('Auth.id')
+                ]) ?>
 
                 <div class="mb-3">
                     <?= $this->Form->control('fechareserva', [
                         'class' => 'form-control',
-                        'label' => 'Fecha Reserva'
+                        'label' => __('Fecha Reserva')
                     ]) ?>
                 </div>
 
                 <div class="mb-3">
                     <?= $this->Form->control('estado', [
                         'class' => 'form-control',
-                        'label' => 'Estado'
+                        'label' => __('Estado')
                     ]) ?>
                 </div>
 
                 <div class="mb-3">
                     <?= $this->Form->control('fechacreacion', [
                         'class' => 'form-control',
-                        'label' => 'Fecha Creación',
+                        'label' => __('Fecha Creación'),
                         'empty' => true
                     ]) ?>
                 </div>
@@ -78,15 +80,15 @@
                 <div class="mb-3">
                     <?= $this->Form->control('observaciones', [
                         'class' => 'form-control',
-                        'label' => 'Observaciones',
+                        'label' => __('Observaciones'),
                         'type' => 'textarea',
-                        'placeholder' => 'Ingrese observaciones...'
+                        'placeholder' => __('Ingrese observaciones...')
                     ]) ?>
                 </div>
 
                 <!-- BOTÓN GUARDAR -->
                 <div class="d-flex justify-content-end">
-                    <?= $this->Form->button('Guardar', [
+                    <?= $this->Form->button(__('Guardar'), [
                         'class' => 'btn btn-danger px-4'
                     ]) ?>
                 </div>

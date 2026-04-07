@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="text-danger">Recursos</h3>
+    <h3 class="text-danger"><?= __('Recursos') ?></h3>
 
     <?= $this->Html->link(
-        ' Nuevo Recurso',
+        __('Nuevo Recurso'),
         ['action' => 'add'],
         ['class' => 'btn btn-danger']
     ) ?>
@@ -12,10 +12,10 @@
     <table class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id', 'ID') ?></th>
-                <th><?= $this->Paginator->sort('nombre', 'Nombre') ?></th>
-                <th><?= $this->Paginator->sort('fecha_creacion', 'Fecha Creación') ?></th>
-                <th class="text-center">Acciones</th>
+                <th><?= $this->Paginator->sort('id', __('ID')) ?></th>
+                <th><?= $this->Paginator->sort('nombre', __('Nombre')) ?></th>
+                <th><?= $this->Paginator->sort('fecha_creacion', __('Fecha Creación')) ?></th>
+                <th class="text-center"><?= __('Acciones') ?></th>
             </tr>
         </thead>
 
@@ -28,23 +28,23 @@
                 <td class="text-center">
 
                     <?= $this->Html->link(
-                        'Ver',
+                        __('Ver'),
                         ['action' => 'view', $recurso->id],
                         ['class' => 'btn btn-sm btn-primary']
                     ) ?>
 
                     <?= $this->Html->link(
-                        'Editar',
+                        __('Editar'),
                         ['action' => 'edit', $recurso->id],
                         ['class' => 'btn btn-sm btn-warning']
                     ) ?>
 
                     <?= $this->Form->postLink(
-                        'Eliminar',
+                        __('Eliminar'),
                         ['action' => 'delete', $recurso->id],
                         [
                             'class' => 'btn btn-sm btn-danger',
-                            'confirm' => '¿Desea eliminar este recurso?'
+                            'confirm' => __('¿Desea eliminar este recurso?')
                         ]
                     ) ?>
 

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\I18n\I18n;
 use Authentication\PasswordHasher\DefaultPasswordHasher;
 //use Cake\Auth\DefaultPasswordHasher;
 /**
@@ -110,6 +111,7 @@ class UsersController extends AppController
 
             $correo = $this->request->getData('correo');
             $password = $this->request->getData('password');
+            $idioma = $this->request->getData('idioma');
 
             // Buscar usuario por correo
             $user = $this->Users->find()
@@ -123,6 +125,12 @@ class UsersController extends AppController
 
                     // Guardar sesión del usuario logeado
                     $this->request->getSession()->write('Auth', $user);
+
+                    //guarda idioma en sesion
+                    if (!empty($idioma)) {
+                        $this->request->getSession()->write('Config.language', $idioma);
+                        I18n::setLocale($idioma);
+                    }
 
                     return $this->redirect([
                         'controller' => 'Users',

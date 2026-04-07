@@ -1,0 +1,8 @@
+msgid "Reservas"
+msgstr "Reservas"
+
+msgid "Guardar"
+msgstr "Guardar"
+
+msgid "Agregar"
+msgstr "Agregar"

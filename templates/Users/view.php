@@ -7,11 +7,11 @@
                 <!-- HEADER -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-danger mb-0">
-                         <?= h($user->nombre . ' ' . $user->apellido) ?>
+                        <?= h($user->nombre . ' ' . $user->apellido) ?>
                     </h4>
 
                     <?= $this->Html->link(
-                        '← Volver',
+                        __('← Volver'),
                         ['action' => 'index'],
                         ['class' => 'btn btn-outline-secondary btn-sm']
                     ) ?>
@@ -21,35 +21,35 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <th class="bg-light">Nombre</th>
+                            <th class="bg-light"><?= __('Nombre') ?></th>
                             <td><?= h($user->nombre) ?></td>
                         </tr>
                         <tr>
-                            <th class="bg-light">Apellido</th>
+                            <th class="bg-light"><?= __('Apellido') ?></th>
                             <td><?= h($user->apellido) ?></td>
                         </tr>
                         <tr>
-                            <th class="bg-light">Correo</th>
+                            <th class="bg-light"><?= __('Correo') ?></th>
                             <td><?= h($user->correo) ?></td>
                         </tr>
                         <tr>
-                            <th class="bg-light">Idioma</th>
+                            <th class="bg-light"><?= __('Idioma') ?></th>
                             <td><?= h($user->language) ?></td>
                         </tr>
                         <tr>
-                            <th class="bg-light">Dirección</th>
+                            <th class="bg-light"><?= __('Dirección') ?></th>
                             <td><?= h($user->direccion) ?></td>
                         </tr>
                         <tr>
-                            <th class="bg-light">ID</th>
+                            <th class="bg-light"><?= __('ID') ?></th>
                             <td><?= $this->Number->format($user->id) ?></td>
                         </tr>
                         <tr>
-                            <th class="bg-light">Creado</th>
+                            <th class="bg-light"><?= __('Creado') ?></th>
                             <td><?= h($user->created) ?></td>
                         </tr>
                         <tr>
-                            <th class="bg-light">Modificado</th>
+                            <th class="bg-light"><?= __('Modificado') ?></th>
                             <td><?= h($user->modified) ?></td>
                         </tr>
                     </tbody>
@@ -59,17 +59,17 @@
                 <div class="d-flex justify-content-end gap-2">
 
                     <?= $this->Html->link(
-                        'Editar',
+                        __('Editar'),
                         ['action' => 'edit', $user->id],
                         ['class' => 'btn btn-warning']
                     ) ?>
 
                     <?= $this->Form->postLink(
-                        'Eliminar',
+                        __('Eliminar'),
                         ['action' => 'delete', $user->id],
                         [
                             'class' => 'btn btn-danger',
-                            'confirm' => '¿Seguro que deseas eliminar este usuario?'
+                            'confirm' => __('¿Seguro que deseas eliminar este usuario?')
                         ]
                     ) ?>
 

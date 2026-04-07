@@ -6,10 +6,10 @@
 
                 <!-- HEADER -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-danger mb-0">Nuevo Recurso</h4>
+                    <h4 class="text-danger mb-0"><?= __('Nuevo Recurso') ?></h4>
 
                     <?= $this->Html->link(
-                        '← Volver',
+                        __('← Volver'),
                         ['action' => 'index'],
                         ['class' => 'btn btn-outline-secondary btn-sm']
                     ) ?>
@@ -20,31 +20,31 @@
                 <div class="mb-3">
                     <?= $this->Form->control('nombre', [
                         'class' => 'form-control',
-                        'label' => 'Nombre',
-                        'placeholder' => 'Ingrese el nombre del recurso'
+                        'label' => __('Nombre'),
+                        'placeholder' => __('Ingrese el nombre del recurso')
                     ]) ?>
                 </div>
 
                 <div class="mb-3">
                     <?= $this->Form->control('descripcion', [
                         'class' => 'form-control',
-                        'label' => 'Descripción',
+                        'label' => __('Descripción'),
                         'type' => 'textarea',
-                        'placeholder' => 'Ingrese la descripción...'
+                        'placeholder' => __('Ingrese la descripción...')
                     ]) ?>
                 </div>
 
                 <div class="mb-3">
                     <?= $this->Form->control('fecha_creacion', [
                         'class' => 'form-control',
-                        'label' => 'Fecha Creación',
+                        'label' => __('Fecha Creación'),
                         'empty' => true
                     ]) ?>
                 </div>
 
                 <!-- BOTÓN -->
                 <div class="d-flex justify-content-end">
-                    <?= $this->Form->button('Guardar', [
+                    <?= $this->Form->button(__('Guardar'), [
                         'class' => 'btn btn-danger px-4'
                     ]) ?>
                 </div>

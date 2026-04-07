@@ -11,7 +11,7 @@
                     </h4>
 
                     <?= $this->Html->link(
-                        '← Volver',
+                        __('← Volver'),
                         ['action' => 'index'],
                         ['class' => 'btn btn-outline-secondary btn-sm']
                     ) ?>
@@ -21,11 +21,11 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <th class="bg-light">Nombre</th>
+                            <th class="bg-light"><?= __('Nombre') ?></th>
                             <td><?= h($role->nombre) ?></td>
                         </tr>
                         <tr>
-                            <th class="bg-light">ID</th>
+                            <th class="bg-light"><?= __('ID') ?></th>
                             <td><?= $this->Number->format($role->id) ?></td>
                         </tr>
                     </tbody>
@@ -35,17 +35,17 @@
                 <div class="d-flex justify-content-end gap-2">
 
                     <?= $this->Html->link(
-                        'Editar',
+                        __('Editar'),
                         ['action' => 'edit', $role->id],
                         ['class' => 'btn btn-warning']
                     ) ?>
 
                     <?= $this->Form->postLink(
-                        'Eliminar',
+                        __('Eliminar'),
                         ['action' => 'delete', $role->id],
                         [
                             'class' => 'btn btn-danger',
-                            'confirm' => '¿Seguro que deseas eliminar este rol?'
+                            'confirm' => __('¿Seguro que deseas eliminar este rol?')
                         ]
                     ) ?>
 

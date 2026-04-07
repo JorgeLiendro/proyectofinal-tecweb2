@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="text-danger">Roles</h3>
+    <h3 class="text-danger"><?= __('Roles') ?></h3>
 
     <?= $this->Html->link(
-        ' Nuevo Rol',
+        __('Nuevo Rol'),
         ['action' => 'add'],
         ['class' => 'btn btn-danger']
     ) ?>
@@ -12,9 +12,9 @@
     <table class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id', 'ID') ?></th>
-                <th><?= $this->Paginator->sort('nombre', 'Nombre') ?></th>
-                <th class="text-center">Acciones</th>
+                <th><?= $this->Paginator->sort('id', __('ID')) ?></th>
+                <th><?= $this->Paginator->sort('nombre', __('Nombre')) ?></th>
+                <th class="text-center"><?= __('Acciones') ?></th>
             </tr>
         </thead>
 
@@ -26,23 +26,23 @@
                 <td class="text-center">
 
                     <?= $this->Html->link(
-                        'Ver',
+                        __('Ver'),
                         ['action' => 'view', $role->id],
                         ['class' => 'btn btn-sm btn-primary']
                     ) ?>
 
                     <?= $this->Html->link(
-                        'Editar',
+                        __('Editar'),
                         ['action' => 'edit', $role->id],
                         ['class' => 'btn btn-sm btn-warning']
                     ) ?>
 
                     <?= $this->Form->postLink(
-                        'Eliminar',
+                        __('Eliminar'),
                         ['action' => 'delete', $role->id],
                         [
                             'class' => 'btn btn-sm btn-danger',
-                            'confirm' => '¿Desea eliminar este rol?'
+                            'confirm' => __('¿Desea eliminar este rol?')
                         ]
                     ) ?>
 
