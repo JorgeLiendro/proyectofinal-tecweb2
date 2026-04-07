@@ -1,6 +1,6 @@
 #  Sistema de Gestión de Reservas
 
-## 📝 Descripción
+##  Descripción
 Sistema web full-stack desarrollado con **CakePHP 5.3.3** para la gestión de reservas de accesorios.  
 Previene conflictos de doble reserva mediante validación automática de solapamientos temporales y ofrece gestión de recursos, roles y usuarios.
 
@@ -25,7 +25,7 @@ Previene conflictos de doble reserva mediante validación automática de solapam
 
 ---
 
-## 📁 Estructura del Proyecto
+##  Estructura del Proyecto
 
 ```bash
 cakephp-entregablefin/
@@ -137,8 +137,60 @@ podman-compose up
 http://localhost:8080
 
 Comandos útiles para podman
+- Listar imágenes descargadas
+```bash
+podman images
+```
+- Eliminar una imagen
+```bash
+podman rmi nombre_imagen
+```
+- Construir una imagen desde un dockerfile
+```bash
+podman build -t nombre_imagen .
+```
+- Listar contenedores en ejecución
+```bash
+podman ps
+```
+- Listar todos (incluye detenidos)
+```bash
+podman ps -a
+```
+- Detener un contenedor
+```bash
+podman stop nombre_contenedor
+```
+- Iniciar un contenedor detenido
+```bash
+podman start nombre_contenedor
+```
+- Reiniciar un contenedor
+```bash
+podman restart nombre_contenedor
+```
+- Eliminar un contenedor
+```bash
+podman rm nombre_contenedor
+```
+- Levantar servicios
+```bash
+podman-compose up -d
+```
+- Detener servicios
+```bash
+podman-compose down
+```
+- Ver logs
+```bash
+podman-compose logs
+```
+- Reconstruir contenedores
+```bash
+podman-compose up --build
+```
 
 
-
-## 👨‍💻 Autor
+##  Autor
 - Jorge Liendro
+- Proyecto desarrollado para la materia Tecnología Web II
