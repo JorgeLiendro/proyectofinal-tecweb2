@@ -24,37 +24,37 @@ Contenedores: Podman
 Estructura del Proyecto
 
 cakephp-entregablefin/
-├── **APP_EF/**                   
+├── **APP_EF/**                    
 │   ├── config/
 │   ├── logs/
 │   ├── plugins/
 │   └── resources/
 ├── src/
-│   ├── **Controller/**          
+│   ├── **Controller/**        
 │   │   ├── Cell/
 │   │   ├── DetalleReservas/
 │   │   ├── Email/
 │   │   ├── Layout/
 │   │   ├── Pages/
 │   │   ├── **RecursosController.php**
-│   │   ├── **ReservasController.php**    
+│   │   ├── **ReservasController.php**     
 │   │   ├── RolesController.php
 │   │   └── UsersController.php
-│   ├── **Model/**               
+│   ├── **Model/**              
 │   │   ├── cell/
 │   │   ├── **DetalleReservasTable.php**
 │   │   ├── **RecursosTable.php**
-│   │   ├── **ReservasTable.php**          
+│   │   ├── **ReservasTable.php**        
 │   │   ├── RolesTable.php
 │   │   └── **UsersTable.php**
-│   ├── **templates/**           
+│   ├── **templates/**          
 │   │   ├── cell/
 │   │   ├── **DetalleReservas/**
 │   │   ├── email/
 │   │   ├── **layout/**
 │   │   ├── Pages/
 │   │   ├── **recursos/**
-│   │   ├── **reservas/**              
+│   │   ├── **reservas/**             
 │   │   │   ├── add.ctp
 │   │   │   ├── edit.ctp
 │   │   │   ├── index.ctp              
@@ -72,4 +72,4 @@ cakephp-entregablefin/
 
 Instalación del proyecto
 - Clonar el proyecto:
-git clone 
+git clone https://github.com/JorgeLiendro/proyectofinal-tecweb2.git
