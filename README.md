@@ -117,6 +117,7 @@ bin/cake server -p 8765
 git clone https://github.com/JorgeLiendro/proyectofinal-tecweb2.git
 ```
 3. Dentro de devops crear archivos: dockerfile y compose.yml
+
 Dockerfile
 ```bash
 # Dockerfile CakePHP listo para Podman y DebugKit
