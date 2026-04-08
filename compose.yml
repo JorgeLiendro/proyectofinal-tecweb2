@@ -1,0 +1,7 @@
+services:
+  php-app:
+    image: proyectofinal-tecweb2
+    container_name: proyectofinal-tecweb2
+    ports:
+      - "8080:80"
+    restart: unless-stopped
