@@ -95,11 +95,11 @@ composer install
 ```
 
 ### 4️⃣ Configurar entorno de Base de datos
-- Copiar el archivo:
-```bash
-cp config/app_local.example.php config/app_local.php
-```
 - Configurar la conexión a la base de datos en `app_local.php`
+```bash
+cp  config/app_local.php
+```
+-En este proyecto, ejecutar en phpmyadmin la BD que esta en el archivo db_ef.sql(usuario admin y cliente ingresan por correo, su password es 123 para ambos)
 
 ### 5️⃣ Ejecutar el servidor
 ```bash
