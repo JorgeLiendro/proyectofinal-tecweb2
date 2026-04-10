@@ -62,11 +62,12 @@ public function beforeFilter(\Cake\Event\EventInterface $event)
     $controller = $this->request->getParam('controller');
     $action = $this->request->getParam('action');
 
-    // 🌐 IDIOMA GLOBAL
+    //  IDIOMA GLOBAL
     $idioma = $session->read('Config.language') ?? 'es';
     I18n::setLocale($idioma);
 
-    // 🔐 PERMITIR LOGIN Y LOGOUT
+    // PERMITIR LOGIN Y LOGOUT
+    //if (!$session->check('Auth') && !in_array($action, ['login', 'logout'])) {
     if (!$session->check('Auth') && !in_array($action, ['login', 'logout'])) {
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
