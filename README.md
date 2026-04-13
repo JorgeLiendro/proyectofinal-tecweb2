@@ -116,7 +116,7 @@ bin/cake server -p 8765
 ```bash
 git clone https://github.com/JorgeLiendro/proyectofinal-tecweb2.git
 ```
-3. Dentro de devops crear archivos: dockerfile y compose.yml
+3. Dentro de devops crear archivos: Dockerfile y compose.yml
 
 Dockerfile
 ```bash
@@ -209,15 +209,19 @@ podman-compose up -d --build
 podman ps
 ```
 -Ejemplo:
+```bash
 live@minios:~/devops$ podman ps
 CONTAINER ID  IMAGE                                COMMAND               CREATED      STATUS      PORTS                 NAMES
 bca31d5ee0a1  docker.io/library/mariadb:10.11      mariadbd              2 hours ago  Up 2 hours  3306/tcp              cakephp_db
 bef60d96b560  localhost/devops_php-app:latest      apache2-foregroun...  2 hours ago  Up 2 hours  0.0.0.0:8080->80/tcp  cakephp_app
 5264b68ab032  docker.io/library/phpmyadmin:latest  apache2-foregroun...  2 hours ago  Up 2 hours  0.0.0.0:8081->80/tcp  cakephp_phpmyadmin
-
+```
 6. Acceder a la aplicacion:
+
 http://localhost:8080
+
 Solucionar problemas de permisos (Mas seguro que le suceda):
+
 Ejecutar :
 ```bash
 podman exec -it cakephp_app bash
@@ -254,13 +258,19 @@ Buscar esta secciòn dentro del archivo app_local.php y reemplazarla por esta:
     ],
 ```
 La ip se obtiene con: podman inspect cakephp_db | grep IPAddress (esa ip poner en host de archivo app_local.php y en PMA_HOST en compose.yml para phpmyadmin)
+
 Bajar contenedores:podman-compose down
+
 Reconstruir imagen y levantar contenedores:podman-compose up -d --build
+
 (Despues debera poder acceder al sistema sin problemas)
 
 -Acceder a phpMyAdmin: http://localhost:8081/ (descargar de este github el archivo db_ef.sql e importar la BD dentro de la BD "db_ef" que ya està creada)
+
 Credenciales de acceso rol admin: ap@gmail.com con contraseña 123
+
 Credenciales de acceso rol cliente: mf@gmail.com con contraseña 123
+
 
 Comandos útiles para podman
 - Listar imágenes descargadas
