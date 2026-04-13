@@ -108,7 +108,7 @@ bin/cake server -p 8765
 -Abrir en el navegador: http://localhost:8765
 
 ---
-### Despliegue con PODMAN
+### Despliegue con PODMAN (Objetivo de este GitHub)
 1. Crear carpeta
 - mkdir devops
 - cd devops
@@ -120,67 +120,147 @@ git clone https://github.com/JorgeLiendro/proyectofinal-tecweb2.git
 
 Dockerfile
 ```bash
-# Dockerfile CakePHP listo para Podman y DebugKit
-FROM php:8.4-apache-bullseye
+FROM php:8.4-apache
 
-# Evitar interacción al instalar paquetes
-ENV DEBIAN_FRONTEND=noninteractive
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/webroot
 
-# Forzar HTTPS en repositorios y actualizar apt
-RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libicu-dev \
-        libonig-dev \
-        libsqlite3-dev \
-        unzip \
-        git \
-        curl \
-    && docker-php-ext-install intl mbstring pdo pdo_mysql mysqli pdo_sqlite \
-    && docker-php-ext-enable intl mbstring pdo pdo_mysql mysqli pdo_sqlite \
-    && a2enmod rewrite \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Dependencias del sistema + extensiones PHP
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        git unzip curl \
+        libzip-dev libonig-dev libpng-dev libicu-dev zlib1g-dev libxml2-dev; \
+    docker-php-ext-install pdo pdo_mysql mysqli mbstring zip intl opcache xml; \
+    a2enmod rewrite headers; \
+    rm -rf /var/lib/apt/lists/*
 
-# Copiar código de la aplicación
-COPY proyectofinal-tecweb2/ /var/www/html/
+# Instalar Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Configurar permisos
+# Apache apuntando a CakePHP /webroot
+RUN sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf \
+    && sed -ri -e "s!<Directory /var/www/html>!<Directory ${APACHE_DOCUMENT_ROOT}>!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+WORKDIR /var/www/html
+
+# Copiar proyecto
+COPY proyectofinal-tecweb2/ /var/www/html
+
+# Instalar dependencias PHP del proyecto
+RUN composer install --no-interaction --prefer-dist || true
+
+# Permisos CakePHP
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+    && chmod -R 775 /var/www/html/tmp /var/www/html/logs || true
 
-# Instalar Composer globalmente
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Instalar DebugKit automáticamente
-RUN cd /var/www/html && composer require --dev cakephp/debug_kit
-
-# Exponer puerto 80
 EXPOSE 80
 
-# Comando por defecto para Apache
 CMD ["apache2-foreground"]
 ```
 compose.yml
 ```bash
 services:
   php-app:
-    image: proyectofinal-tecweb2
-    container_name: proyectofinal-tecweb2
+    build: .
+    container_name: cakephp_app
     ports:
       - "8080:80"
+    volumes:
+      - ./proyectofinal-tecweb2:/var/www/html
+      - /var/www/html/vendor
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mariadb:10.11
+    container_name: cakephp_db
+    environment:
+      MYSQL_ROOT_PASSWORD: server123
+      MYSQL_DATABASE: db_ef
+      MYSQL_USER: root
+      MYSQL_PASSWORD: server123
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: cakephp_phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: 10.89.0.2
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: server123
+      MYSQL_ROOT_PASSWORD: server123
+    depends_on:
+      - db
     restart: unless-stopped
 ```
-4.Construir imagen
+4.Construir imagen y levantar contenedores
 ```bash
-podman build -t app_ef .
+podman-compose up -d --build
 ```
-5. Ejecutar contenedor
+5. Verificar que esten 3 contenedores activos: la app, base de datos y phpMyAdmin
 ```bash
-podman-compose up
+podman ps
 ```
-6. Acceder
+-Ejemplo:
+live@minios:~/devops$ podman ps
+CONTAINER ID  IMAGE                                COMMAND               CREATED      STATUS      PORTS                 NAMES
+bca31d5ee0a1  docker.io/library/mariadb:10.11      mariadbd              2 hours ago  Up 2 hours  3306/tcp              cakephp_db
+bef60d96b560  localhost/devops_php-app:latest      apache2-foregroun...  2 hours ago  Up 2 hours  0.0.0.0:8080->80/tcp  cakephp_app
+5264b68ab032  docker.io/library/phpmyadmin:latest  apache2-foregroun...  2 hours ago  Up 2 hours  0.0.0.0:8081->80/tcp  cakephp_phpmyadmin
+
+6. Acceder a la aplicacion:
 http://localhost:8080
+Solucionar problemas de permisos (Mas seguro que le suceda):
+Ejecutar :
+```bash
+podman exec -it cakephp_app bash
+```
+Dentro:
+```bash
+mkdir -p /var/www/html/logs
+mkdir -p /var/www/html/tmp/cache/models
+mkdir -p /var/www/html/tmp/cache/persistent
+
+chown -R www-data:www-data /var/www/html/tmp /var/www/html/logs
+chmod -R 775 /var/www/html/tmp /var/www/html/logs
+```
+Crear  archivo de configuración local para BD
+```bash
+cp config/app_local.example.php config/app_local.php
+```
+Buscar esta secciòn dentro del archivo app_local.php y reemplazarla por esta:
+```bash
+'Datasources' => [
+    'default' => [
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => '10.89.0.2',
+        'username' => 'root',
+        'password' => 'server123',
+        'database' => 'db_ef',
+        'encoding' => 'utf8mb4',
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,
+        'quoteIdentifiers' => false,
+        'url' => env('DATABASE_URL', null),
+    ],
+```
+La ip se obtiene con: podman inspect cakephp_db | grep IPAddress (esa ip poner en host de archivo app_local.php y en PMA_HOST en compose.yml para phpmyadmin)
+Bajar contenedores:podman-compose down
+Reconstruir imagen y levantar contenedores:podman-compose up -d --build
+(Despues debera poder acceder al sistema sin problemas)
+
+-Acceder a phpMyAdmin: http://localhost:8081/ (descargar de este github el archivo db_ef.sql e importar la BD dentro de la BD "db_ef" que ya està creada)
+Credenciales de acceso rol admin: ap@gmail.com con contraseña 123
+Credenciales de acceso rol cliente: mf@gmail.com con contraseña 123
 
 Comandos útiles para podman
 - Listar imágenes descargadas
